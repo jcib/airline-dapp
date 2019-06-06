@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Panel from "./Panel";
-
 import getWeb3 from "./getWeb3";
+import AirlineContract from "./airline";
 
 export class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { //estado inicial de la cuenta 0
+        this.state = {
             account: undefined
         };
     }
@@ -15,10 +15,13 @@ export class App extends Component {
     async componentDidMount(){
 
         this.web3 = await getWeb3();
+        this.airline = await AirlineContract(this.web3.currentProvider);
         
+        console.log(this.airline.buyFlight);
+
         var account = (await this.web3.eth.getAccounts())[0];
         
-        this.setState ({ //con callback, esperar a que cargue
+        this.setState ({
             account: account.toLowerCase()
         }, () => {
             this.load();
