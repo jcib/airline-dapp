@@ -8,6 +8,7 @@ export class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            balance: 0,
             account: undefined
         };
     }
@@ -16,8 +17,6 @@ export class App extends Component {
 
         this.web3 = await getWeb3();
         this.airline = await AirlineContract(this.web3.currentProvider);
-        
-        console.log(this.airline.buyFlight);
 
         var account = (await this.web3.eth.getAccounts())[0];
         
@@ -28,10 +27,17 @@ export class App extends Component {
         });
     }
 
-   async load() {
-        
-   }
+    async getBalance(){
 
+        let weiBalance = await this.web3.eth.getBalance(this.state.account);
+        this.setState({
+            balance: weiBalance
+        })        
+    }
+
+    async load() {
+        this.getBalance();
+    }
 
     render() {
         return <React.Fragment>
@@ -42,6 +48,8 @@ export class App extends Component {
             <div className="row">
                 <div className="col-sm">
                     <Panel title="Balance">
+                        <p><strong>{this.state.account}</strong></p>
+                        <span><strong>Balance:</strong> {this.state.balance}</span>
 
                     </Panel>
                 </div>
