@@ -28,7 +28,10 @@ export class App extends Component {
         });
     }
 
-    
+   async load() {
+        
+   }
+
 
     render() {
         return <React.Fragment>
