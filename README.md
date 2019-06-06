@@ -1,4 +1,5 @@
-# The Airline - An Ethereum learning DAPP
+# Aerolínea - DAPP
+# Implementación de Ethereum en una aerolínea
 
 **Source template for my Udemy Ethereum training course at Udemy**
 
